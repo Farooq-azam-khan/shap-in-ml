@@ -2,4 +2,5 @@ pandas
 shap 
 patsy 
 sklearn 
+matplotlib
 xgboost

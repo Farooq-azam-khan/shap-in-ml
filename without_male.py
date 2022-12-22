@@ -10,7 +10,7 @@ print(data.head())
 
 from patsy import dmatrices 
 y, X = dmatrices(
-        'clicked_on_ad ~ daily_time_spent_on_site + age + area_income + daily_internet_usage + male - 1'
+        'clicked_on_ad ~ daily_time_spent_on_site + age + area_income + daily_internet_usage - 1'
         , data = data 
 )
 X_frame = pd.DataFrame(data=X, columns=X.design_info.column_names)
@@ -37,10 +37,5 @@ shap_values = explainer(X_frame)
 shap.plots.waterfall(shap_values[0])
 shap.summary_plot(shap_values, X)
 
+
 shap.plots.bar(shap_values)
-shap.plots.scatter(shap_values[:, 'daily_internet_usage'])
-shap.plots.scatter(shap_values[:, 'daily_internet_usage'], color=shap_values)
-shap.plots.scatter(shap_values[:, 'daily_time_spent_on_site'], color=shap_values)
-shap.plots.scatter(shap_values[:, 'area_income'], color=shap_values)
-shap.plots.scatter(shap_values[:, 'age'], color=shap_values)
-shap.plots.scatter(shap_values[:, 'male'], color=shap_values)
